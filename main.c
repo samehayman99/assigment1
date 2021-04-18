@@ -11,6 +11,6 @@ struct student
 };
 int main()
 {
-
+printf("%s","welcome in emmbeded assignment");
     return 0;
 }
