@@ -9,8 +9,204 @@ struct student
     int month_of_birth ;
     int year_of_birth ;
     int score;
-    char student_name[];
+    char student_name[MAX] ;
 };
+
+
+
+struct node
+{
+    struct student data;
+    struct node * next;
+};
+
+void insert_at_beginning (struct node ** head,struct node ** tail )
+{
+    char c;
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    printf("\nEnter your ID ");
+    scanf("%d",&new_node->data.ID );
+    printf("\nEnter your day_of_birth  ");
+    scanf("%d",&new_node->data.day_of_birth );
+    printf("\nEnter your month_of_birth ");
+    scanf(" %d",&new_node->data.month_of_birth);
+    printf("\nEnter your year_of_birth ");
+    scanf(" %d",&new_node->data.year_of_birth );
+    printf("\nEnter your score ");
+    scanf(" %d",&new_node->data.score );
+    printf("\nEnter your student_name ");
+    while((c = getchar()) != '\n' && c != EOF);
+    fgets(new_node->data.student_name, sizeof(new_node->data.student_name), stdin);
+    new_node->next = (*head);
+    (*head)    = new_node;
+    if ((*head)->next == NULL)
+       (*tail)=(*head);
+}
+
+void insert_at_ending (struct node ** tail,struct node ** head)
+{
+    char c;
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    printf("\nEnter your ID ");
+    scanf("%d",&new_node->data.ID );
+    printf("\nEnter your day_of_birth  ");
+    scanf("%d",&new_node->data.day_of_birth );
+    printf("\nEnter your month_of_birth ");
+    scanf(" %d",&new_node->data.month_of_birth);
+    printf("\nEnter your year_of_birth ");
+    scanf(" %d",&new_node->data.year_of_birth );
+    printf("\nEnter your score ");
+    scanf(" %d",&new_node->data.score );
+    printf("\nEnter your student_name ");
+    while((c = getchar()) != '\n' && c != EOF);
+    fgets(new_node->data.student_name, sizeof(new_node->data.student_name), stdin);
+    new_node->next = NULL;
+     if (((*head) == NULL )&&((*tail) == NULL ))
+     {
+         (*tail)=new_node;
+         (*head)=(*tail);
+     }
+    else
+    {
+        (*tail)->next =new_node;
+        (*tail)    = new_node;
+    }
+ }
+
+void insert_at_Middle(struct node ** head,struct node ** tail)
+{
+
+    int POS,x;
+    struct node * c=(*head);
+    for(x=0;c!=NULL;x++)
+        c=c->next;
+    if (x==0)
+    {
+            printf("list is empty\n");
+
+    }
+    else
+    {
+
+            printf("you have %d students\nWhere do you want to add your data ?  ",x);
+            scanf("%d",&POS);
+
+            if((POS>x)||(POS<=0))
+               {
+                   printf("Wrong Position \n");
+                   return;
+
+               }
+
+            else
+                {       struct node * Prev=NULL;
+                        struct node * curr=(*head);
+                        for(x=1;x <= POS ;x++)
+                            {
+
+                                if (x == POS)
+                                    {
+                                        printf("insert your data\n");
+                                        char c;
+                                        struct node* new_node = (struct node*) malloc(sizeof(struct node));
+                                        printf("\nEnter your ID ");
+                                        scanf("%d",&new_node->data.ID );
+                                        printf("\nEnter your day_of_birth  ");
+                                        scanf("%d",&new_node->data.day_of_birth );
+                                        printf("\nEnter your month_of_birth ");
+                                        scanf(" %d",&new_node->data.month_of_birth);
+                                        printf("\nEnter your year_of_birth ");
+                                        scanf(" %d",&new_node->data.year_of_birth );
+                                        printf("\nEnter your score ");
+                                        scanf(" %d",&new_node->data.score );
+                                        printf("\nEnter your student_name ");
+                                        while((c = getchar()) != '\n' && c != EOF);
+                                        fgets(new_node->data.student_name, sizeof(new_node->data.student_name), stdin);
+                                        new_node->next = NULL;
+
+                                        Prev ->next = new_node;
+                                        Prev = new_node;
+                                        Prev ->next = curr;
+
+
+                                    }
+
+                                Prev = curr;
+                                curr = curr->next;
+
+
+                            }
+                }
+
+
+    }
+
+
+
+}
+
+
+void traverseList(struct node ** head)
+{
+    struct node *temp;
+
+    // Return if list is empty
+    if((*head) == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+
+    temp = (*head);
+    while(temp != NULL)
+    {
+
+    printf("\n your ID %d",temp->data.ID);
+
+    printf("\n your day_of_birth  %d",temp->data.day_of_birth);
+
+    printf("\n your month_of_birth %d",temp->data.month_of_birth);
+
+    printf("\n your year_of_birth %d",temp->data.year_of_birth);
+
+    printf("\n your score %d",temp->data.score);
+
+    printf("\n your student_name %s",temp->data.student_name);
+        temp = temp->next;                 // Move to next node
+    }
+}
+
+
+void link_list_n_students(int N , struct node ** head,struct node ** tail )
+{
+    if (N==0){return;}
+    else{
+            int i;
+        for (i=1 ;i<=N;i++)
+            {
+
+            struct node* new_node = (struct node*) malloc(sizeof(struct node));
+
+            new_node->data.ID =0;
+
+            new_node->data.day_of_birth =0;
+
+            new_node->data.month_of_birth =0;
+
+            new_node->data.year_of_birth =0;
+
+            new_node->data.score =0;
+
+            //new_node->data.student_name;
+
+            new_node->next = (*head);
+            (*head)    = new_node;
+            if(i==1) (*tail)    = new_node;
+            }
+        }
+
+}
+
 void Dynamic_array_n_students( int N , struct student ** p)
 {
     int i =2;
